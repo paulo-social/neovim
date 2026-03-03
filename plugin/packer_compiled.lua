@@ -280,6 +280,11 @@ _G.packer_plugins = {
     path = "/Users/paulo/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
+  ["termicons.nvim"] = {
+    loaded = true,
+    path = "/Users/paulo/.local/share/nvim/site/pack/packer/start/termicons.nvim",
+    url = "https://github.com/mskelton/termicons.nvim"
+  },
   ["trouble.nvim"] = {
     loaded = true,
     path = "/Users/paulo/.local/share/nvim/site/pack/packer/start/trouble.nvim",
@@ -314,6 +319,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/paulo/.local/share/nvim/site/pack/packer/start/vim-run",
     url = "https://github.com/sbdchd/vim-run"
+  },
+  ["vim-test"] = {
+    loaded = true,
+    path = "/Users/paulo/.local/share/nvim/site/pack/packer/start/vim-test",
+    url = "https://github.com/vim-test/vim-test"
   }
 }
 

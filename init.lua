@@ -58,6 +58,7 @@ require('packer').startup(function(use)
   use("stevearc/conform.nvim")
   use("akinsho/bufferline.nvim")
   use 'nvim-tree/nvim-web-devicons' -- or use 'echasnovski/mini.icons'
+  use { "mskelton/termicons.nvim", requires = { "nvim-tree/nvim-web-devicons" } }
 
   use 'nvim-tree/nvim-tree.lua'
   use 'MunifTanjim/nui.nvim'

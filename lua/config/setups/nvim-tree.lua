@@ -6,9 +6,9 @@ function M.setup()
       sorter = "case_sensitive",
     },
     filters = {
-      dotfiles = true,
+      dotfiles = false,
       git_ignored = true,
-      custom = { "^%.git$", "^%.github$" },
+      custom = { ".git" },
       exclude = { vim.fn.stdpath("config") .. "/lua/custom" },
     },
     disable_netrw = true,
@@ -34,7 +34,7 @@ function M.setup()
     view = {
       adaptive_size = false,
       side = "left",
-      width = 25,
+      width = 30,
       preserve_window_proportions = true,
     },
     git = {
@@ -66,8 +66,9 @@ function M.setup()
         enable = true,
       },
       icons = {
+        padding = "",
         show = {
-          file = false,
+          file = true,
           folder = false,
           folder_arrow = true,
           git = false,
