@@ -103,6 +103,14 @@ Outros:
 - `<F5>/<F10>/<F11>/<F12>` DAP (requer `nvim-dap`)
 - `<Leader>b` breakpoint (requer `nvim-dap`)
 
+**Customização dos Agentes de IA**
+
+Os prompts que guiam os agentes do `codecompanion` (Architect, Coder, Tester, etc) e os Pipelines foram extraídos da configuração Lua para facilitar a manutenção.  
+Para customizar o comportamento de como a IA gera código ou gerencia o fluxo:
+
+- Edite os arquivos `.md` na pasta `lua/config/prompts/agents/`.
+- Para editar a estratégia geral (o prompt inicial do Slash Command), edite `lua/config/prompts/pipelines/my_coder.md`.
+
 **Notas**
 
 - Se o `telescope-fzf-native` falhar, instale `make` e rode `:PackerSync` novamente.
