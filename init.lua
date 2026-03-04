@@ -59,6 +59,7 @@ require('packer').startup(function(use)
   use("akinsho/bufferline.nvim")
   use 'nvim-tree/nvim-web-devicons' -- or use 'echasnovski/mini.icons'
   use { "mskelton/termicons.nvim", requires = { "nvim-tree/nvim-web-devicons" } }
+  use('mrloop/telescope-git-branch.nvim')
 
   use 'nvim-tree/nvim-tree.lua'
   use 'MunifTanjim/nui.nvim'

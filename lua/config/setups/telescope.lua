@@ -15,6 +15,7 @@ function M.setup()
   })
 
   pcall(telescope.load_extension, "fzf")
+  pcall(telescope.load_extension, "git_branch")
 end
 
 return M
