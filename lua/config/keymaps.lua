@@ -39,12 +39,6 @@ function M.setup()
   vim.keymap.set('n', '<Leader>fd', telescope.diagnostics, { desc = 'Buscar diagnósticos' })
   vim.keymap.set('n', '<Leader>fr', telescope.resume, { desc = 'Retomar última busca' })
 
-  vim.keymap.set('n', '<Leader>xx', '<cmd>TroubleToggle<CR>', { silent = true, desc = 'Trouble' })
-  vim.keymap.set('n', '<Leader>xw', '<cmd>TroubleToggle workspace_diagnostics<CR>', { silent = true, desc = 'Diagnósticos do workspace' })
-  vim.keymap.set('n', '<Leader>xd', '<cmd>TroubleToggle document_diagnostics<CR>', { silent = true, desc = 'Diagnósticos do arquivo' })
-  vim.keymap.set('n', '<Leader>xq', '<cmd>TroubleToggle quickfix<CR>', { silent = true, desc = 'Quickfix' })
-  vim.keymap.set('n', '<Leader>xl', '<cmd>TroubleToggle loclist<CR>', { silent = true, desc = 'Location list' })
-
   vim.keymap.set('n', '<Tab>', ':BufferLineCycleNext<CR>', { silent = true, desc = 'Próxima aba' })
   vim.keymap.set('n', '<S-Tab>', ':BufferLineCyclePrev<CR>', { silent = true, desc = 'Aba anterior' })
   vim.keymap.set('n', '<Leader>x', ':bdelete<CR>', { silent = true, desc = 'Fechar aba atual' })
