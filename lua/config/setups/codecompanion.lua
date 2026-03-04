@@ -1,10 +1,22 @@
 local M = {}
 
+local function read_file(filepath)
+	local file = io.open(vim.fn.expand(filepath), "r")
+	if not file then
+		return "Prompt not found: " .. filepath
+	end
+	local content = file:read("*a")
+	file:close()
+	return vim.trim(content)
+end
+
 function M.setup()
 	local ok, codecompanion = pcall(require, "codecompanion")
 	if not ok then
 		return
 	end
+
+	local prompt_dir = "~/.config/nvim/lua/config/prompts/"
 
 	codecompanion.setup({
 		adapters = {
@@ -24,14 +36,7 @@ function M.setup()
 				prompts = {
 					{
 						role = "system",
-						content = [[
-              Você é o Gerente de Projeto. Coordene os agentes na seguinte ordem:
-              1. @Architect: Desenhe a solução.
-              2. @Coder: Implemente a lógica.
-              3. @Tester: Crie os testes.
-              4. @Validator: Execute os testes no terminal e reporte falhas.
-              5. @GitAgent: Se o @Validator der OK, faça o commit e push.
-            ]],
+						content = read_file(prompt_dir .. "pipelines/my_coder.md"),
 					},
 					{
 						role = "user",
@@ -54,28 +59,28 @@ function M.setup()
 			{
 				name = "Architect",
 				roles = {
-					llm = "Você é um Software Architect. Seu papel é desenhar a solução, definir interfaces, tipos e a estrutura de pastas antes de qualquer código ser escrito.",
+					llm = read_file(prompt_dir .. "agents/architect.md"),
 				},
 				strategies = { "chat" },
 			},
 			{
 				name = "Coder",
 				roles = {
-					llm = "Você é um Senior Developer. Você implementa a lógica de negócio seguindo o plano do Architect, focando em Clean Code e performance.",
+					llm = read_file(prompt_dir .. "agents/coder.md"),
 				},
 				strategies = { "chat" },
 			},
 			{
 				name = "Tester",
 				roles = {
-					llm = "Você é um SDET. Sua única missão é escrever testes unitários e de integração exaustivos para o código gerado pelo @Coder.",
+					llm = read_file(prompt_dir .. "agents/tester.md"),
 				},
 				strategies = { "chat" },
 			},
 			{
 				name = "Validator",
 				roles = {
-					llm = "Você é um especialista em CI/CD. Você deve executar comandos de linter (static analysis) e rodar os testes unitários para garantir que tudo compila e passa.",
+					llm = read_file(prompt_dir .. "agents/validator.md"),
 				},
 				strategies = { "chat" },
 				opts = { tools = { "cmd_runner" } },
@@ -83,7 +88,7 @@ function M.setup()
 			{
 				name = "GitAgent",
 				roles = {
-					llm = "Você gerencia o controle de versão. Seu papel é criar commits semânticos e realizar o push para o repositório remoto.",
+					llm = read_file(prompt_dir .. "agents/git_agent.md"),
 				},
 				strategies = { "chat" },
 				opts = { tools = { "cmd_runner" } },
