@@ -3,6 +3,7 @@
 Configuração focada em produtividade com um "kit Cursor-like": LSP completo, busca rápida, diagnósticos, snippets, Git integrado e IA no fluxo.
 
 **Visão Geral**
+
 - Gerenciador de plugins: `packer.nvim`.
 - LSP: `mason.nvim` + `mason-lspconfig.nvim` + `nvim-lspconfig`.
 - Autocomplete: `nvim-cmp`.
@@ -18,6 +19,7 @@ Configuração focada em produtividade com um "kit Cursor-like": LSP completo, b
 - Syntax: `nvim-treesitter`.
 
 **Instalação**
+
 1. Execute o script de dependências no macOS:
    - `./install_darwin.sh`
 2. Abra o Neovim e instale plugins:
@@ -28,6 +30,7 @@ Configuração focada em produtividade com um "kit Cursor-like": LSP completo, b
    - `:Mason`
 
 **Dependências Recomendadas**
+
 - `git`
 - `ripgrep` (para `live_grep` no Telescope)
 - `fd` (para busca de arquivos no Telescope)
@@ -38,6 +41,7 @@ Configuração focada em produtividade com um "kit Cursor-like": LSP completo, b
 - `make` (para `telescope-fzf-native`)
 
 **NvimTree**
+
 - `.git` e `.github` ficam ocultos via `filters.custom`.
 - Ajuste em `lua/config/setups/nvim-tree.lua` se quiser mostrar:
   - Remova `custom = { "^%.git$", "^%.github$" }`
@@ -46,10 +50,12 @@ Configuração focada em produtividade com um "kit Cursor-like": LSP completo, b
 Leader: `Espaço`
 
 NvimTree:
+
 - `<C-n>` toggle
 - `<Leader>e` focus
 
 Telescope:
+
 - `<Leader>ff` buscar arquivos
 - `<Leader>fg` buscar texto no projeto
 - `<Leader>fs` buscar palavra sob o cursor
@@ -58,6 +64,7 @@ Telescope:
 - `<Leader>fr` retomar última busca
 
 LSP:
+
 - `<Leader>df` ir para definição
 - `<Leader>dc` ir para declaração
 - `<Leader>gi` ir para implementações
@@ -69,18 +76,13 @@ LSP:
 - `<Leader>s` assinatura da função
 
 Diagnósticos:
+
 - `<Leader>d` diagnóstico flutuante
 - `<Leader>db` anterior
 - `<Leader>dp` próximo
 
-Trouble:
-- `<Leader>xx` abrir/fechar
-- `<Leader>xw` diagnósticos do workspace
-- `<Leader>xd` diagnósticos do arquivo
-- `<Leader>xq` quickfix
-- `<Leader>xl` location list
-
 Buffers:
+
 - `<Tab>` próximo buffer
 - `<S-Tab>` buffer anterior
 - `<Leader>x` fechar buffer atual
@@ -89,16 +91,19 @@ Buffers:
 - `<Leader>$` ir para último buffer
 
 IA:
+
 - `<Leader>ac` abrir chat (CodeCompanion)
 - `<Leader>ai` prompt inline (CodeCompanion)
 - `<Leader>aa` ações (CodeCompanion)
 
 Outros:
+
 - `<Leader>w` alternar entre janelas
 - `<Leader>t` Tagbar toggle
 - `<F5>/<F10>/<F11>/<F12>` DAP (requer `nvim-dap`)
 - `<Leader>b` breakpoint (requer `nvim-dap`)
 
 **Notas**
+
 - Se o `telescope-fzf-native` falhar, instale `make` e rode `:PackerSync` novamente.
 - Para alterar o tema, edite `init.lua` e ajuste `colorscheme`.
