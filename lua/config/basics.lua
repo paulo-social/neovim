@@ -33,6 +33,9 @@ function M.setup()
     vim.opt.wrap = false
     vim.opt.termguicolors = true
 
+    -- Remove o ~ que aparece em linhas vazias
+    vim.opt.fillchars:append("eob: ")
+
     vim.wo.colorcolumn = "80"
     vim.wo.relativenumber = false
     vim.wo.number = true

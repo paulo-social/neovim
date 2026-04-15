@@ -114,20 +114,10 @@ _G.packer_plugins = {
     path = "/Users/paulo/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
-  ["codecompanion.nvim"] = {
-    loaded = true,
-    path = "/Users/paulo/.local/share/nvim/site/pack/packer/start/codecompanion.nvim",
-    url = "https://github.com/olimorris/codecompanion.nvim"
-  },
   ["conform.nvim"] = {
     loaded = true,
     path = "/Users/paulo/.local/share/nvim/site/pack/packer/start/conform.nvim",
     url = "https://github.com/stevearc/conform.nvim"
-  },
-  ["copilot.lua"] = {
-    loaded = true,
-    path = "/Users/paulo/.local/share/nvim/site/pack/packer/start/copilot.lua",
-    url = "https://github.com/zbirenbaum/copilot.lua"
   },
   ["dressing.nvim"] = {
     loaded = true,
@@ -173,6 +163,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/paulo/.local/share/nvim/site/pack/packer/start/hierarchy-tree-go.nvim",
     url = "https://github.com/crusj/hierarchy-tree-go.nvim"
+  },
+  ["lspkind.nvim"] = {
+    loaded = true,
+    path = "/Users/paulo/.local/share/nvim/site/pack/packer/start/lspkind.nvim",
+    url = "https://github.com/onsails/lspkind.nvim"
   },
   ["lualine.nvim"] = {
     loaded = true,
@@ -274,6 +269,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/paulo/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim",
     url = "https://github.com/nvim-telescope/telescope-fzf-native.nvim"
+  },
+  ["telescope-git-branch.nvim"] = {
+    loaded = true,
+    path = "/Users/paulo/.local/share/nvim/site/pack/packer/start/telescope-git-branch.nvim",
+    url = "https://github.com/mrloop/telescope-git-branch.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,

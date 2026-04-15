@@ -28,6 +28,7 @@ require('packer').startup(function(use)
   use 'saadparwaiz1/cmp_luasnip'
   use 'L3MON4D3/LuaSnip'
   use 'rafamadriz/friendly-snippets'
+  use 'onsails/lspkind.nvim'
   use("sheerun/vim-polyglot")
   use("lewis6991/gitsigns.nvim")
   use("sbdchd/vim-run")
@@ -64,8 +65,8 @@ require('packer').startup(function(use)
   use 'nvim-tree/nvim-tree.lua'
   use 'MunifTanjim/nui.nvim'
   use 'MeanderingProgrammer/render-markdown.nvim'
-  use 'zbirenbaum/copilot.lua'
-  use 'olimorris/codecompanion.nvim'
+  -- use 'zbirenbaum/copilot.lua'
+  -- use 'olimorris/codecompanion.nvim'
 
   use {
     "ravitemer/mcphub.nvim",
