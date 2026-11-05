@@ -39,6 +39,8 @@ function M.setup()
     vim.wo.colorcolumn = "80"
     vim.wo.relativenumber = false
     vim.wo.number = true
+
+    vim.g.scrollbar_v2_notice = false
 end
 
 return M

@@ -6,9 +6,7 @@ function M.setup()
             current_line = false,
             prefix = '◼',
             spacing = 4,
-            severity = {
-                [vim.diagnostic.severity.ERROR] = {},
-            }
+            severity = vim.diagnostic.severity.ERROR,
         },
         virtual_lines = { current_line = true },
         float = {
@@ -20,7 +18,10 @@ function M.setup()
         },
         signs = {
             text = {
-                [1] = '◼', ['WARN'] = '◼', ['HINT'] = '◼', ['INFO'] = '◼'
+                [vim.diagnostic.severity.ERROR] = '◼',
+                [vim.diagnostic.severity.WARN] = '◼',
+                [vim.diagnostic.severity.HINT] = '◼',
+                [vim.diagnostic.severity.INFO] = '◼',
             },
         },
         underline = true,

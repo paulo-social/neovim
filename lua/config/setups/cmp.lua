@@ -75,6 +75,7 @@ function M.setup()
 
   -- Configurar cores para a janela de completion
   vim.api.nvim_create_autocmd("ColorScheme", {
+    group = vim.api.nvim_create_augroup("CompletionColors", { clear = true }),
     pattern = "*",
     callback = function()
       vim.api.nvim_set_hl(0, "Pmenu", { bg = "#1e1e2e", fg = "#cdd6f4" })

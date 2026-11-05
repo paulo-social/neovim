@@ -49,8 +49,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/Users/paulo/.cache/nvim/packer_hererocks/2.1.1780076327/share/lua/5.1/?.lua;/Users/paulo/.cache/nvim/packer_hererocks/2.1.1780076327/share/lua/5.1/?/init.lua;/Users/paulo/.cache/nvim/packer_hererocks/2.1.1780076327/lib/luarocks/rocks-5.1/?.lua;/Users/paulo/.cache/nvim/packer_hererocks/2.1.1780076327/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/Users/paulo/.cache/nvim/packer_hererocks/2.1.1780076327/lib/lua/5.1/?.so"
+local package_path_str = "/Users/paulo/.cache/nvim/packer_hererocks/2.1.1793383622/share/lua/5.1/?.lua;/Users/paulo/.cache/nvim/packer_hererocks/2.1.1793383622/share/lua/5.1/?/init.lua;/Users/paulo/.cache/nvim/packer_hererocks/2.1.1793383622/lib/luarocks/rocks-5.1/?.lua;/Users/paulo/.cache/nvim/packer_hererocks/2.1.1793383622/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/Users/paulo/.cache/nvim/packer_hererocks/2.1.1793383622/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -182,12 +182,12 @@ _G.packer_plugins = {
   ["mason-lspconfig.nvim"] = {
     loaded = true,
     path = "/Users/paulo/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
-    url = "https://github.com/williamboman/mason-lspconfig.nvim"
+    url = "https://github.com/mason-org/mason-lspconfig.nvim"
   },
   ["mason.nvim"] = {
     loaded = true,
     path = "/Users/paulo/.local/share/nvim/site/pack/packer/start/mason.nvim",
-    url = "https://github.com/williamboman/mason.nvim"
+    url = "https://github.com/mason-org/mason.nvim"
   },
   ["nordic.nvim"] = {
     loaded = true,
@@ -218,6 +218,12 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/paulo/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
+  },
+  ["nvim-plantuml"] = {
+    config = { "\27LJ\2\ng\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\3\17auto_refresh\2\vviewer\topen\15output_dir\t/tmp\nsetup\rplantuml\frequire\0" },
+    loaded = true,
+    path = "/Users/paulo/.local/share/nvim/site/pack/packer/start/nvim-plantuml",
+    url = "https://github.com/Maduki-tech/nvim-plantuml"
   },
   ["nvim-scrollbar"] = {
     loaded = true,
@@ -254,11 +260,6 @@ _G.packer_plugins = {
     path = "/Users/paulo/.local/share/nvim/site/pack/packer/start/render-markdown.nvim",
     url = "https://github.com/MeanderingProgrammer/render-markdown.nvim"
   },
-  rustaceanvim = {
-    loaded = true,
-    path = "/Users/paulo/.local/share/nvim/site/pack/packer/start/rustaceanvim",
-    url = "https://github.com/mrcjkb/rustaceanvim"
-  },
   tagbar = {
     loaded = true,
     path = "/Users/paulo/.local/share/nvim/site/pack/packer/start/tagbar",
@@ -288,6 +289,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/paulo/.local/share/nvim/site/pack/packer/start/todo-comments.nvim",
     url = "https://github.com/folke/todo-comments.nvim"
+  },
+  ["tokyonight.nvim"] = {
+    loaded = true,
+    path = "/Users/paulo/.local/share/nvim/site/pack/packer/start/tokyonight.nvim",
+    url = "https://github.com/folke/tokyonight.nvim"
   },
   ["trouble.nvim"] = {
     loaded = true,
@@ -332,6 +338,10 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: nvim-plantuml
+time([[Config for nvim-plantuml]], true)
+try_loadstring("\27LJ\2\ng\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\3\17auto_refresh\2\vviewer\topen\15output_dir\t/tmp\nsetup\rplantuml\frequire\0", "config", "nvim-plantuml")
+time([[Config for nvim-plantuml]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

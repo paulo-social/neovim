@@ -1,16 +1,25 @@
 local M = {}
 
 function M.setup()
-  vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
-  vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
-  vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)
-  vim.keymap.set('n', '<F12>', function() require('dap').step_out() end)
+  local function diagnostic_float(diagnostic, bufnr)
+    if diagnostic and vim.api.nvim_buf_is_valid(bufnr) then
+      vim.diagnostic.open_float({ bufnr = bufnr, scope = 'cursor', focus = false })
+    end
+  end
+
+  local has_dap, dap = pcall(require, 'dap')
+  if has_dap then
+    vim.keymap.set('n', '<F5>', dap.continue)
+    vim.keymap.set('n', '<F10>', dap.step_over)
+    vim.keymap.set('n', '<F11>', dap.step_into)
+    vim.keymap.set('n', '<F12>', dap.step_out)
+    vim.keymap.set('n', '<Leader>b', dap.toggle_breakpoint)
+  end
 
   vim.keymap.set('n', '<C-n>', ':NvimTreeToggle<CR>', { silent = true, desc = 'Toggle NvimTree' })
   vim.keymap.set('n', '<Leader>e', ':NvimTreeFocus<CR>', { silent = true, desc = 'Focus NvimTree' })
   vim.keymap.set('n', '<Leader>w', '<C-w>w', { silent = true, desc = 'Alternar entre janelas' })
   
-  vim.keymap.set('n', '<Leader>b', function() require('dap').toggle_breakpoint() end)
   vim.keymap.set('n', '<Leader>t', ':TagbarToggle<CR>', { silent = true })
 
   vim.keymap.set('n', '<Leader>d', vim.diagnostic.open_float, { desc = 'Abrir diagnóstico flutuante' })
@@ -23,13 +32,15 @@ function M.setup()
   vim.keymap.set('n', '<Leader>s', function() vim.lsp.buf.signature_help({ border = "rounded" }) end, { desc = 'Exibir assinatura da função' })
   vim.keymap.set('n', '<Leader>r', vim.lsp.buf.rename, { desc = 'Renomear símbolo' })
   vim.keymap.set('n', '<Leader>ca', vim.lsp.buf.code_action, { desc = 'Ações de código' })
-  vim.keymap.set('n', '<Leader>db', vim.diagnostic.goto_prev, { desc = 'Ir para diagnóstico anterior' })
-  vim.keymap.set('n', '<Leader>dp', vim.diagnostic.goto_next, { desc = 'Ir para próximo diagnóstico' })
+  vim.keymap.set('n', '<Leader>db', function() vim.diagnostic.jump({ count = -1, on_jump = diagnostic_float }) end, { desc = 'Ir para diagnóstico anterior' })
+  vim.keymap.set('n', '<Leader>dp', function() vim.diagnostic.jump({ count = 1, on_jump = diagnostic_float }) end, { desc = 'Ir para próximo diagnóstico' })
 
-  vim.keymap.set('n', '<Leader>ac', ':CodeCompanionChat<CR>', { silent = true, desc = 'Abrir chat (CodeCompanion)' })
-  vim.keymap.set('n', '<Leader>ai', ':CodeCompanion<CR>', { silent = true, desc = 'Prompt inline (CodeCompanion)' })
-  vim.keymap.set('x', '<Leader>ai', ':CodeCompanion<CR>', { silent = true, desc = 'Prompt inline (CodeCompanion)' })
-  vim.keymap.set('n', '<Leader>aa', ':CodeCompanionActions<CR>', { silent = true, desc = 'Ações (CodeCompanion)' })
+  if pcall(require, 'codecompanion') then
+    vim.keymap.set('n', '<Leader>ac', ':CodeCompanionChat<CR>', { silent = true, desc = 'Abrir chat (CodeCompanion)' })
+    vim.keymap.set('n', '<Leader>ai', ':CodeCompanion<CR>', { silent = true, desc = 'Prompt inline (CodeCompanion)' })
+    vim.keymap.set('x', '<Leader>ai', ':CodeCompanion<CR>', { silent = true, desc = 'Prompt inline (CodeCompanion)' })
+    vim.keymap.set('n', '<Leader>aa', ':CodeCompanionActions<CR>', { silent = true, desc = 'Ações (CodeCompanion)' })
+  end
 
   local telescope = require('telescope.builtin')
   vim.keymap.set('n', '<Leader>ff', telescope.find_files, { desc = 'Buscar arquivos' })

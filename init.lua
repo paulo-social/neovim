@@ -1,3 +1,6 @@
+require('config.basics').setup()
+require('config.providers').setup()
+
 local ensure_packer = function()
   local fn = vim.fn
   local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
@@ -15,18 +18,16 @@ require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'AlexvZyl/nordic.nvim'
 
-  use {
-    'neovim/nvim-lspconfig',
-    'williamboman/mason.nvim',
-    'williamboman/mason-lspconfig.nvim',
-  }
+  use 'neovim/nvim-lspconfig'
+  use 'mason-org/mason.nvim'
+  use 'mason-org/mason-lspconfig.nvim'
 
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
   use 'saadparwaiz1/cmp_luasnip'
-  use 'L3MON4D3/LuaSnip'
+  use { 'L3MON4D3/LuaSnip', run = 'make install_jsregexp' }
   use 'rafamadriz/friendly-snippets'
   use 'onsails/lspkind.nvim'
   use("sheerun/vim-polyglot")
@@ -44,7 +45,13 @@ require('packer').startup(function(use)
   use("windwp/nvim-autopairs")
   use("yanskun/gotests.nvim")
   use("fatih/vim-go")
-  use("nvim-treesitter/nvim-treesitter")
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    branch = 'main',
+    run = function()
+      require('nvim-treesitter').update():wait(300000)
+    end,
+  }
   use("petertriho/nvim-scrollbar")
   use("maxandron/goplements.nvim")
   use("crusj/hierarchy-tree-go.nvim")
@@ -58,7 +65,7 @@ require('packer').startup(function(use)
   use("stevearc/conform.nvim")
   use("akinsho/bufferline.nvim")
   use 'nvim-tree/nvim-web-devicons' -- or use 'echasnovski/mini.icons'
-  use { "mskelton/termicons.nvim", requires = { "nvim-tree/nvim-web-devicons" } }
+  use "mskelton/termicons.nvim"
   use('mrloop/telescope-git-branch.nvim')
 
   use 'nvim-tree/nvim-tree.lua'
@@ -85,51 +92,27 @@ require('packer').startup(function(use)
   end
 end)
 
-vim.cmd([[colorscheme tokyonight]])
-
-require("mason").setup()
-require("mason-lspconfig").setup({
-  ensure_installed = {
-    "pyright",
-    "gopls",
-    "jdtls",
-    "html",
-    "ts_ls",
-    "rust_analyzer",
-    "bashls",
-    "sqlls",
-    "jsonls",
-    "lua_ls",
-  }
-})
-
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-local servers = {
-  'pyright',
-  'gopls',
-  'jdtls',
-  'html',
-  'ts_ls',
-  'rust_analyzer',
-  'bashls',
-  'sqlls',
-  'jsonls',
-  'lua_ls',
-  "django-template-lsp",
-  "docker-language-server",
-  "djlint",
-}
-
-for _, server in ipairs(servers) do
-  vim.lsp.config[server] = {
-    capabilities = capabilities
-  }
+if packer_bootstrap then
+  return
 end
 
--- TODO: hello world
+-- A detecção automática do tema consulta vim.pack, mas usamos Packer.
+require('catppuccin').setup({
+  auto_integrations = false,
+  integrations = {
+    cmp = true,
+    fzf = true,
+    gitsigns = true,
+    illuminate = { enabled = true },
+    lsp_trouble = true,
+    mason = true,
+    nvimtree = true,
+    render_markdown = true,
+    telescope = true,
+  },
+})
+vim.cmd([[colorscheme catppuccin-frappe]])
+
 require('config.setups').setup()
 require('config.settings').setup()
 require('config.keymaps').setup()
-require('config.basics').setup()
-require('config.setups').setup()

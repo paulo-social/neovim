@@ -1,6 +1,12 @@
 local M = {}
 
 function M.setup()
+  vim.lsp.config("*", {
+    capabilities = require('cmp_nvim_lsp').default_capabilities(),
+  })
+
+  vim.filetype.add({ extension = { gotmpl = "gotmpl" } })
+
   require("mason").setup()
   require("mason-lspconfig").setup({
     ensure_installed = {
@@ -17,41 +23,9 @@ function M.setup()
     }
   })
 
-  local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-  local servers = {
-    'pyright',
-    'gopls',
-    'jdtls',
-    'html',
-    'ts_ls',
-    'rust_analyzer',
-    'bashls',
-    'sqlls',
-    'jsonls',
-    'lua_ls',
-    "django-template-lsp",
-    "docker-language-server",
-    "djlint",
-  }
-
-  for _, server in ipairs(servers) do
-    vim.lsp.config[server] = {
-      capabilities = capabilities
-    }
-  end
-
-  -- Configuração global para adicionar bordas nas janelas flutuantes do LSP
-  local border = "rounded"
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-    border = border,
-  })
-  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    border = border,
-  })
-
   -- Força a cor da borda a ser branca
   vim.api.nvim_create_autocmd("ColorScheme", {
+    group = vim.api.nvim_create_augroup("LspBorders", { clear = true }),
     pattern = "*",
     callback = function()
       vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#FFFFFF", bg = "NONE" })

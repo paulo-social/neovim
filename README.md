@@ -1,6 +1,6 @@
 # Neovim Config
 
-Configuração focada em produtividade com um "kit Cursor-like": LSP completo, busca rápida, diagnósticos, snippets, Git integrado e IA no fluxo.
+Configuração para Neovim 0.12 ou superior, com LSP, busca, diagnósticos, snippets e Git integrado.
 
 **Visão Geral**
 
@@ -10,10 +10,8 @@ Configuração focada em produtividade com um "kit Cursor-like": LSP completo, b
 - Snippets: `LuaSnip` + `friendly-snippets`.
 - Busca/Jump: `telescope.nvim` + `telescope-fzf-native`.
 - Diagnósticos: `trouble.nvim`.
-- Descoberta de atalhos: `which-key.nvim`.
 - Git: `gitsigns.nvim` + `blame.nvim`.
 - UI: `lualine.nvim`, `bufferline.nvim`, `dressing.nvim`, `scrollbar.nvim`.
-- AI: `copilot.lua` + `codecompanion.nvim`.
 - Files: `nvim-tree.lua` (com `.git` e `.github` ocultos).
 - Formatting: `conform.nvim`.
 - Syntax: `nvim-treesitter`.
@@ -21,24 +19,60 @@ Configuração focada em produtividade com um "kit Cursor-like": LSP completo, b
 **Instalação**
 
 1. Execute o script de dependências no macOS:
-   - `./install_darwin.sh`
+   - `sh install_darwin.sh`
 2. Abra o Neovim e instale plugins:
-   - `:PackerSync`
+   - `:PackerSync`, seguido de uma reinicialização do Neovim.
 3. Instale/atualize parsers do Tree-sitter:
    - `:TSUpdate`
 4. LSPs via Mason:
    - `:Mason`
+5. Verifique a instalação:
+   - `:checkhealth`
+
+O script instala os executáveis usados pelos plugins. Os servidores LSP ficam a cargo
+do Mason. Para reparar apenas o ambiente Python, as ferramentas Go e o LuaSnip,
+execute `sh scripts/install_tools.sh`.
 
 **Dependências Recomendadas**
 
 - `git`
 - `ripgrep` (para `live_grep` no Telescope)
 - `fd` (para busca de arquivos no Telescope)
-- `node` e `npm` (Copilot/CodeCompanion e alguns LSPs)
-- `python3` + `pynvim`
+- `node` e `npm` (servidores LSP)
+- `python3`: o script cria um ambiente em `stdpath('data')/python3` com
+  `pynvim`, `black`, `isort` e `pylatexenc`. A configuração usa esse Python
+  independentemente do ambiente virtual do projeto.
 - `go` (para ferramentas Go)
 - `rust` + `cargo` (para LSPs Rust e builds nativos)
 - `make` (para `telescope-fzf-native`)
+- `tree-sitter-cli` >= 0.26.1 (compilação dos parsers)
+- `stylua`, `prettier` e `rustfmt` (formatação)
+- `bat` (prévia de arquivos) e `wget` (downloads do Mason)
+
+As ferramentas Go são instaladas em `stdpath('data')/bin`, adicionado ao PATH
+do Neovim. Isso evita perdê-las ao trocar a versão do Go pelo GVM.
+
+**Manutenção e checkhealth**
+
+- `:PackerSync` atualiza plugins e executa os hooks de compilação do LuaSnip
+  e atualização dos parsers. Reinicie o Neovim após concluir.
+- `:TSUpdate` sincroniza os parsers com as queries do Tree-sitter. Após atualizar,
+  reinicie antes de verificar novamente o healthcheck.
+- `:ConformInfo` mostra a disponibilidade dos formatadores.
+- `:checkhealth` verifica todos os plugins; `:checkhealth vim.deprecated`
+  mostra chamadas obsoletas executadas na sessão.
+- O módulo `lua/config/setups/goplements.lua` adapta a verificação do parser Go
+  à API nativa, pois o healthcheck do plugin ainda chama `has_parser`, removido
+  no ramo `main` do Tree-sitter. Parsers ausentes continuam sendo reportados.
+- O Catppuccin usa integrações explícitas, pois sua detecção automática não
+  reconhece o Packer e inicializa desnecessariamente o gerenciador `vim.pack`.
+
+O healthcheck também verifica ferramentas opcionais não usadas nesta configuração:
+PHP/Composer, Julia, LuaRocks, providers remotos Node/Ruby/Perl e visualizadores
+de imagens (`viu`, `chafa`, `ueberzugpp`). Avisos sobre essas ferramentas não
+impedem LSP, autocomplete, snippets ou formatação. Os providers remotos são
+independentes dos servidores LSP dessas linguagens. Essas verificações permanecem
+ativas para indicar dependências que você venha a precisar.
 
 **NvimTree**
 
@@ -90,7 +124,7 @@ Buffers:
 - `<Leader>1`...`<Leader>9` ir para buffer
 - `<Leader>$` ir para último buffer
 
-IA:
+IA (atalhos criados somente se `codecompanion.nvim` estiver instalado):
 
 - `<Leader>ac` abrir chat (CodeCompanion)
 - `<Leader>ai` prompt inline (CodeCompanion)
@@ -100,16 +134,10 @@ Outros:
 
 - `<Leader>w` alternar entre janelas
 - `<Leader>t` Tagbar toggle
-- `<F5>/<F10>/<F11>/<F12>` DAP (requer `nvim-dap`)
-- `<Leader>b` breakpoint (requer `nvim-dap`)
+- `<F5>/<F10>/<F11>/<F12>` DAP (criados somente se `nvim-dap` estiver instalado)
+- `<Leader>b` breakpoint (criado somente se `nvim-dap` estiver instalado)
 
-**Customização dos Agentes de IA**
-
-Os prompts que guiam os agentes do `codecompanion` (Architect, Coder, Tester, etc) e os Pipelines foram extraídos da configuração Lua para facilitar a manutenção.  
-Para customizar o comportamento de como a IA gera código ou gerencia o fluxo:
-
-- Edite os arquivos `.md` na pasta `lua/config/prompts/agents/`.
-- Para editar a estratégia geral (o prompt inicial do Slash Command), edite `lua/config/prompts/pipelines/my_coder.md`.
+Copilot, CodeCompanion e DAP não são instalados pela configuração atual.
 
 **Notas**
 
