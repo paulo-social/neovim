@@ -1,6 +1,8 @@
 local M = {}
 
 function M.setup()
+    -- Diagnósticos: erros ao lado das outras linhas e detalhes abaixo da atual.
+    -- Espaço d abre a mensagem flutuante; Espaço db/dp navega entre diagnósticos.
     vim.diagnostic.config({
         virtual_text = {
             current_line = false,
@@ -16,6 +18,7 @@ function M.setup()
             source = true,
             header = "",
         },
+        -- Marcadores na margem; sublinhado no código e erros ordenados primeiro.
         signs = {
             text = {
                 [vim.diagnostic.severity.ERROR] = '◼',

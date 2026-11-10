@@ -1,3 +1,6 @@
+-- Barra de buffers: Tab/Shift+Tab navegam; Espaço 1..9 seleciona uma posição.
+-- Comandos :BufferLineCycleNext/Prev, :BufferLineGoToBuffer N e
+-- :BufferLineCloseOthers são usados pelos atalhos de keymaps.lua.
 local M = {}
 
 function M.setup()
@@ -7,10 +10,12 @@ function M.setup()
       style_preset = require("bufferline").style_preset.default,
       themable = true,
       numbers = "none",
+      -- O botão de fechar e o clique direito usam !: descartam mudanças não salvas.
+      -- %d é substituído pelo número do buffer clicado.
       close_command = "bdelete! %d",
       right_mouse_command = "bdelete! %d",
-      left_mouse_command = "buffer %d",
-      middle_mouse_command = nil,
+      left_mouse_command = "buffer %d", -- Clique esquerdo seleciona o buffer.
+      middle_mouse_command = nil, -- Sem ação personalizada para o botão central.
       indicator = {
         icon = '▎',
         style = 'none',

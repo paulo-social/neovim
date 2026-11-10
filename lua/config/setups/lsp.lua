@@ -1,14 +1,20 @@
+-- Servidores de linguagem: navegação, documentação, renomeação e diagnósticos.
+-- :Mason gerencia executáveis; :checkhealth vim.lsp inspeciona clientes ativos.
+-- Os atalhos que usam esses servidores estão em config/keymaps.lua.
 local M = {}
 
 function M.setup()
+  -- Anuncia aos servidores o suporte a autocomplete do nvim-cmp.
   vim.lsp.config("*", {
     capabilities = require('cmp_nvim_lsp').default_capabilities(),
   })
 
+  -- Reconhece arquivos .gotmpl como templates Go.
   vim.filetype.add({ extension = { gotmpl = "gotmpl" } })
 
   require("mason").setup()
   require("mason-lspconfig").setup({
+    -- Mason garante estes servidores; mason-lspconfig os habilita automaticamente.
     ensure_installed = {
       "pyright",
       "gopls",
@@ -23,7 +29,7 @@ function M.setup()
     }
   })
 
-  -- Força a cor da borda a ser branca
+  -- ColorScheme: reaplica bordas brancas sempre que o tema for trocado.
   vim.api.nvim_create_autocmd("ColorScheme", {
     group = vim.api.nvim_create_augroup("LspBorders", { clear = true }),
     pattern = "*",

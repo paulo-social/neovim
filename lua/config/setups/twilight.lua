@@ -1,3 +1,5 @@
+-- :Twilight alterna o escurecimento fora do contexto do cursor.
+-- :TwilightEnable/:TwilightDisable ligam/desligam explicitamente; sem atalho local.
 local M = {}
 
 function M.setup()

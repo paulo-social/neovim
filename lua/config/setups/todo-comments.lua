@@ -1,3 +1,5 @@
+-- Destaca marcadores em comentários; :TodoTelescope busca, :TodoQuickFix lista
+-- na quickfix e :TodoLocList lista na janela atual. Sem atalhos personalizados.
 local M = {}
 
 local highlights = {
@@ -125,6 +127,7 @@ function M.setup()
     },
   })
 
+  -- Reaplica as cores após trocar o tema, quando os highlights dele já existem.
   vim.api.nvim_create_autocmd("ColorScheme", {
     group = group,
     pattern = "*",
@@ -133,6 +136,7 @@ function M.setup()
     end,
   })
 
+  -- Atualiza marcadores ao entrar em buffers/janelas, inclusive após abrir splits.
   vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter", "WinEnter" }, {
     group = group,
     pattern = "*",
@@ -141,6 +145,7 @@ function M.setup()
     end,
   })
 
+  -- Duas atualizações iniciais cobrem a abertura e a montagem da interface.
   vim.defer_fn(refresh_visible_todos, 20)
   vim.defer_fn(refresh_visible_todos, 250)
 end

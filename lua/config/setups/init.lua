@@ -15,6 +15,7 @@ function M.setup()
   require('config.setups.blame').setup()
   require('config.setups.comment').setup()
   require('config.setups.conform').setup()
+  -- Integrações de IA desativadas; não há instalação desses plugins em init.lua.
   -- require('config.setups.copilot').setup()
   -- require('config.setups.codecompanion').setup()
   require('config.setups.telescope').setup()
@@ -26,7 +27,9 @@ function M.setup()
   require('config.setups.cmp').setup()
   require('config.setups.todo-comments').setup()
 
+  -- :TodoTelescope lista marcadores TODO/FIX/etc. usando a janela do Telescope.
   require("telescope").load_extension("todo-comments")
+  -- Carrega o provedor de texto de :FzfLua; os atalhos ff/fg usam Telescope.
   require("fzf-lua.providers.grep")
 end
 

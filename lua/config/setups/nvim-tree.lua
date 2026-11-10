@@ -1,3 +1,11 @@
+-- Explorador: Ctrl+n alterna; Espaço e foca (:NvimTreeToggle/:NvimTreeFocus).
+-- Atalhos padrão locais da árvore: Enter/o abre; Ctrl+v/x/t abre em split
+-- vertical/horizontal/tabpage; Tab abre prévia; q fecha; g? mostra toda a ajuda.
+-- a cria arquivo/pasta; r renomeia; d apaga; c/x/p copia/recorta/cola.
+-- y copia o nome; Y copia o caminho relativo; gy copia o caminho absoluto.
+-- R atualiza; H alterna ocultos; I alterna ignorados pelo Git; U alterna filtro
+-- personalizado; f filtra nomes; F limpa filtro; - sobe a raiz; Ctrl+] muda a raiz.
+-- Estes atalhos valem apenas na árvore e podem sobrepor os atalhos globais.
 local M = {}
 
 function M.setup()
@@ -8,7 +16,7 @@ function M.setup()
     filters = {
       dotfiles = false,
       git_ignored = true,
-      custom = { ".git" },
+      custom = { ".git" }, -- Padrão Lua amplo; também pode ocultar .github/.gitignore.
       exclude = { vim.fn.stdpath("config") .. "/lua/custom" },
     },
     disable_netrw = true,
@@ -100,6 +108,7 @@ function M.setup()
     },
   })
 
+  -- Abre a árvore automaticamente ao iniciar o Neovim.
   vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = function()
     require("nvim-tree.api").tree.open()
   end})

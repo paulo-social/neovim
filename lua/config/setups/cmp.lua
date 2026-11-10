@@ -11,13 +11,20 @@ function M.setup()
         luasnip.lsp_expand(args.body)
       end,
     },
+    -- Atalhos no modo de inserção, enquanto se usa o autocomplete.
+    -- O preset também fornece: setas para selecionar, Ctrl+n/p para abrir o
+    -- menu ou inserir próximo/anterior e Ctrl+y para confirmar item selecionado.
     mapping = cmp.mapping.preset.insert({
+      -- Ctrl+b/f: rola a documentação 4 linhas para cima/baixo.
       ['<C-b>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      -- Ctrl+Espaço: solicita sugestões; Ctrl+e: cancela o autocomplete.
       ['<C-Space>'] = cmp.mapping.complete(),
       ['<C-e>'] = cmp.mapping.abort(),
+      -- Enter: aceita a seleção; sem seleção explícita, aceita o primeiro item.
       ['<CR>'] = cmp.mapping.confirm({ select = true }),
     }),
+    -- Sugestões do servidor LSP, snippets, palavras do buffer e caminhos.
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
       { name = 'luasnip' },

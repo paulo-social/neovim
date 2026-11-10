@@ -1,3 +1,4 @@
+-- Configuração inativa: Copilot não é instalado nem carregado por setups/init.lua.
 local M = {}
 
 function M.setup()
@@ -12,10 +13,10 @@ function M.setup()
       auto_trigger = true,
       debounce = 75,
       keymap = {
-        accept = '<C-l>',
-        next = '<C-]>',
-        prev = '<C-k>',
-        dismiss = '<C-\\>',
+        accept = '<C-l>', -- Inserção: Ctrl+l aceita a sugestão.
+        next = '<C-]>', -- Inserção: Ctrl+] mostra a próxima sugestão.
+        prev = '<C-k>', -- Inserção: Ctrl+k mostra a sugestão anterior.
+        dismiss = '<C-\\>', -- Inserção: Ctrl+barra invertida descarta a sugestão.
       },
     },
     panel = { enabled = false },

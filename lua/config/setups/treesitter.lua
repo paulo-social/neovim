@@ -1,3 +1,4 @@
+-- Sintaxe baseada em parsers; :TSUpdate atualiza parsers e :TSInstall instala.
 local M = {}
 
 function M.setup()
@@ -15,9 +16,10 @@ function M.setup()
   treesitter.setup({
     install_dir = vim.fn.stdpath("data") .. "/site",
   })
-  treesitter.install(languages)
+  treesitter.install(languages) -- Instala os parsers ausentes da lista acima.
 
   local group = vim.api.nvim_create_augroup("TreesitterHighlight", { clear = true })
+  -- Ao detectar o tipo de arquivo, inicia o realce se houver parser disponível.
   vim.api.nvim_create_autocmd("FileType", {
     group = group,
     callback = function(args)

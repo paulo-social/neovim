@@ -1,3 +1,6 @@
+-- Indicador de posição, diagnósticos e alterações Git na lateral da janela.
+-- Atualiza ao rolar/editar/trocar janelas e limpa marcas ao sair delas.
+-- Não define atalhos; busca (search) está desativada nos handlers abaixo.
 local M = {}
 
 function M.setup()

@@ -1,6 +1,6 @@
 local M = {}
 
--- Show if a macro is currently being recorded
+-- Mostra REC @registro durante a gravação de macro (q{registro}; q para encerrar).
 local function macro_status()
 	local reg = vim.fn.reg_recording()
 	if reg ~= "" then
@@ -10,7 +10,7 @@ local function macro_status()
 end
 
 function M.setup()
-	-- Autocmd to refresh lualine when a macro starts/stops recording
+	-- RecordingEnter/Leave atualizam a linha de status ao iniciar/encerrar a macro.
 	vim.api.nvim_create_autocmd("RecordingEnter", {
 		callback = function()
 			require("lualine").refresh({ place = { "statusline" } })
@@ -18,7 +18,7 @@ function M.setup()
 	})
 	vim.api.nvim_create_autocmd("RecordingLeave", {
 		callback = function()
-			-- Timer is needed to ensure the refresh happens after the macro register is cleared
+			-- Espera o registro de gravação ser limpo antes de atualizar a interface.
 			local timer = vim.loop.new_timer()
 			timer:start(
 				50,
@@ -55,7 +55,7 @@ function M.setup()
 			lualine_c = {
 				{
 					"filename",
-					path = 1, -- 0: Just the filename, 1: Relative path, 2: Absolute path
+					path = 1, -- 0: nome; 1: caminho relativo; 2: caminho absoluto.
 					symbols = {
 						modified = "[+]",
 						readonly = "[-]",

@@ -1,3 +1,8 @@
+-- Mudanças Git na margem, nos números e nas linhas; autoria após 300 ms no cursor.
+-- Sem atalhos personalizados. Comandos manuais: :Gitsigns preview_hunk mostra a
+-- alteração; :Gitsigns blame_line mostra a autoria; :Gitsigns diffthis abre diff.
+-- :Gitsigns stage_hunk adiciona o trecho ao índice; :Gitsigns reset_hunk descarta
+-- alterações do trecho. :Gitsigns toggle_current_line_blame alterna autoria inline.
 local M = {}
 
 function M.setup()

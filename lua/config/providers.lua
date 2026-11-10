@@ -7,6 +7,7 @@ function M.setup()
   if vim.fn.executable(python) == 1 then
     vim.g.python3_host_prog = python
   end
+  -- Prioriza ferramentas instaladas por scripts/install_tools.sh (Go e Python).
   vim.env.PATH = data .. "/bin:" .. vim.env.PATH
 end
 
