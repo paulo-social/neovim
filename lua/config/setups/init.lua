@@ -2,6 +2,7 @@ local M = {}
 
 function M.setup()
   -- Configuração dos plugins, executada uma vez durante a inicialização.
+  require('config.setups.virt-column').setup()
   require('config.setups.devicons').setup()
   require('config.setups.nvim-tree').setup()
   require('config.setups.bufferline').setup()

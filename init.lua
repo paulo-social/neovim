@@ -23,6 +23,8 @@ require('packer').startup(function(use)
   -- Gerenciador e tema alternativo (o tema ativo é definido ao final deste arquivo).
   use 'wbthomason/packer.nvim'
   use 'AlexvZyl/nordic.nvim'
+  -- Guia fina para o limite de coluna, usando um caractere em vez de uma faixa.
+  use 'lukas-reineke/virt-column.nvim'
 
   -- Configurações de servidores e instalador: :Mason abre o gerenciador de LSPs.
   use 'neovim/nvim-lspconfig'
@@ -138,7 +140,7 @@ require('catppuccin').setup({
     telescope = true,
   },
 })
-vim.cmd([[colorscheme catppuccin-frappe]]) -- Aplica a variante Frappe do Catppuccin.
+vim.cmd([[colorscheme catppuccin-mocha]]) -- Aplica a variante Mocha do Catppuccin.
 
 -- Configura os plugins antes dos diagnósticos e dos atalhos que chamam suas APIs.
 require('config.setups').setup()
